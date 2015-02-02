@@ -1,0 +1,21 @@
+{
+  "name": "Emulated Device Lab",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "icons": {
+    "38": "icon-38.png",
+    "128": "icon-128.png"
+  },
+  "permissions": ["<all_urls>", "tabs", "tabCapture", "debugger", "contextMenus"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "devtools_page": "devtools.html",
+  "page_action": {
+    "default_icon": {
+      "38": "icon-38.png"
+    }
+  }
+}
