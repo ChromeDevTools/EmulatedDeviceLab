@@ -1,0 +1,53 @@
+
+* {
+    box-sizing: border-box;
+}
+
+#url {
+    width: 300px;
+}
+
+.device-list {
+    padding: 5px;
+    border: solid gray 1px;
+    width: 100%;
+    overflow: scroll;
+}
+
+.device-list-item {
+    background: black;
+    margin: 2px;
+    border: solid black 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.device-list-item.selected {
+    box-shadow: 0 0 10px black;
+}
+
+.device-list-item .video-placeholder {
+    background: yellow;
+    display: inline-block;
+}
+
+.device-list-item h2 {
+    font-size: 9px;
+    background: black;
+    color: white;
+    margin: 0;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+.device-wrapper {
+    text-align: center;
+}
+
+.device-preview {
+    background: black;
+    margin: 5px;
+    border: solid black 10px;
+    border-radius: 10px;
+    display: inline-block;
+}

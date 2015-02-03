@@ -3,21 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Emulated Device Lab - DevTools panel page</title>
-    <style>
-        .streams > div {
-            margin: 2px;
-            border: solid gray 1px;
-            float: left;
-        }
-
-        .streams > div h2 {
-            text-align: center;
-        }
-
-        #url {
-            width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="edl.css"/>
 </head>
 <body>
 
@@ -32,7 +18,11 @@ All devices:
 <button id="reload">Reload</button>
 <hr/>
 
-<div class="streams"></div>
+<div class="device-list"></div>
+
+<div class="device-wrapper">
+    <div class="device-preview"></div>
+</div>
 
 <script src="jspm_packages/traceur.js"></script>
 <script src="jspm_packages/system.js"></script>
