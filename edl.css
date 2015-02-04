@@ -20,16 +20,34 @@
     border: solid black 5px;
     border-radius: 5px;
     display: inline-block;
+    transition: all 300ms;
 }
 
 .device-list-item.selected {
     box-shadow: 0 0 10px black;
 }
 
-.device-list-item .video-placeholder {
-    background: yellow;
-    display: inline-block;
+.device-list-item.loading {
+    -webkit-filter: grayscale(100%);
+    opacity: 0.7;
 }
+
+.device-list-item .video-placeholder {
+    display: inline-block;
+    position: relative;
+}
+
+.device-list-item .video-placeholder::after {
+    content: 'Not connected';
+    color: black;
+    background: rgba(255,255,255,0.7);
+    padding: 2px;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
 
 .device-list-item h2 {
     font-size: 9px;
@@ -50,4 +68,9 @@
     border: solid black 10px;
     border-radius: 10px;
     display: inline-block;
+}
+
+.device-preview:focus {
+    outline: 0;
+    box-shadow: 0 0 10px black;
 }
