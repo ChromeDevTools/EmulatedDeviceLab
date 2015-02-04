@@ -7,21 +7,25 @@
 </head>
 <body>
 
-New device:
-<select id="device-selector"></select>
-<button id="spawn">Spawn</button>
-<hr/>
+<nav>
+    New device:
+    <select id="device-selector"></select>
+    <button id="spawn">Spawn</button>
+    <hr/>
 
-All devices:
-<input type="text" value="http://nytimes.com" id="url"/>
-<button id="reload">Reload</button>
-<hr/>
+    All devices:
+    <input type="text" value="http://nytimes.com" id="url"/>
+    <button id="reload">Reload</button>
+    <hr/>
+</nav>
 
-<div class="device-list"></div>
+<article>
+    <div class="device-list"></div>
 
-<div class="device-wrapper">
-    <div class="device-preview"></div>
-</div>
+    <div class="device-wrapper">
+        <div class="device-preview"></div>
+    </div>
+</article>
 
 <script src="jspm_packages/traceur.js"></script>
 <script src="jspm_packages/system.js"></script>
