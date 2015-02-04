@@ -2,20 +2,23 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Emulated Device Lab - DevTools panel page</title>
-    <link rel="stylesheet" type="text/css" href="edl.css"/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/edl.css"/>
 </head>
-<body>
+<body class="pure-g">
 
 <nav>
     New device:
     <select id="device-selector"></select>
-    <button id="spawn">Spawn</button>
+    <button id="spawn"><i class="fa fa-plus"></i></button>
     <hr/>
 
-    All devices:
+    Navigation:
+    <button id="reload"><i class="fa fa-refresh"></i></button>
     <input type="text" value="http://nytimes.com" id="url"/>
-    <button id="reload">Reload</button>
     <hr/>
 </nav>
 
@@ -26,6 +29,18 @@
         <div class="device-preview"></div>
     </div>
 </article>
+
+<template id="device-list-item-tpl">
+    <div class="device-list-item">
+        <header>
+            <h2></h2>
+            <i class="fa fa-cog fa-spin" title="Website loading"></i>
+        </header>
+        <div class="video-placeholder" title="Not connected">
+            <i class="fa fa-plug"></i>
+        </div>
+    </div>
+</template>
 
 <script src="jspm_packages/traceur.js"></script>
 <script src="jspm_packages/system.js"></script>

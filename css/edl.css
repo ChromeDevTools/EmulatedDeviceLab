@@ -35,7 +35,32 @@ article {
     box-shadow: 0 0 10px black;
 }
 
-.device-list-item.loading {
+.device-list-item header {
+    position: relative;
+}
+
+.device-list-item header h2 {
+    font-size: 9px;
+    background: black;
+    color: white;
+    margin: 0;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+.device-list-item header .fa-cog {
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.device-list-item.loading .fa-cog {
+    display: inline-block;
+}
+
+.device-list-item.loading video {
     -webkit-filter: grayscale(100%);
     opacity: 0.7;
 }
@@ -45,25 +70,13 @@ article {
     position: relative;
 }
 
-.device-list-item .video-placeholder::after {
-    content: 'Not connected';
-    color: black;
-    background: rgba(255,255,255,0.7);
-    padding: 2px;
-
-    position: absolute;
-    top: 5px;
-    left: 5px;
-}
-
-
-.device-list-item h2 {
-    font-size: 9px;
-    background: black;
+.device-list-item .video-placeholder .fa-plug {
     color: white;
-    margin: 0;
-    padding-bottom: 2px;
-    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
 }
 
 .device-wrapper {
