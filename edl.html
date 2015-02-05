@@ -8,25 +8,24 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/edl.css"/>
 </head>
-<body class="pure-g">
-
-<nav>
-    New device:
-    <select id="device-selector"></select>
-    <button id="spawn"><i class="fa fa-plus"></i></button>
-    <hr/>
-
-    Navigation:
-    <button id="reload"><i class="fa fa-refresh"></i></button>
-    <input type="text" value="http://nytimes.com" id="url"/>
-    <hr/>
-</nav>
+<body>
 
 <article>
-    <div class="device-list"></div>
+    <div class="device-list">
+        <div id="new-device">
+            <select id="device-selector"></select>
+            <button id="spawn" title="Spawn new device"><i class="fa fa-plus"></i></button>
+        </div>
+    </div>
 
     <div class="device-wrapper">
-        <div class="device-preview"></div>
+        <div id="navigation">
+            <button id="reload" title="Reload all devices"><i class="fa fa-refresh"></i></button>
+            <input type="text" value="http://nytimes.com" id="url"/>
+        </div>
+        <div class="device-preview">
+            <div class="video-placeholder"></div>
+        </div>
     </div>
 </article>
 
