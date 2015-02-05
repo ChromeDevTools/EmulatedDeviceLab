@@ -10,19 +10,22 @@
 </head>
 <body>
 
-<article>
-    <div class="device-list">
-        <div id="new-device">
-            <select id="device-selector"></select>
-            <button id="spawn" title="Spawn new device"><i class="fa fa-plus"></i></button>
-        </div>
+<nav>
+    <div id="new-device">
+        <select id="device-selector"></select>
+        <button id="spawn" title="Spawn new device"><i class="fa fa-plus"></i></button>
     </div>
+    <div id="navigation">
+        <button id="reload" title="Reload all devices"><i class="fa fa-refresh"></i></button>
+        <input type="text" value="http://www.smashingmagazine.com/" id="url"/>
+    </div>
+</nav>
+
+<article>
+    <div class="device-list"></div>
 
     <div class="device-wrapper">
-        <div id="navigation">
-            <button id="reload" title="Reload all devices"><i class="fa fa-refresh"></i></button>
-            <input type="text" value="http://nytimes.com" id="url"/>
-        </div>
+        <i class="fa fa-times-circle" id="close-preview" title="Close preview"></i>
         <div class="device-preview">
             <div class="video-placeholder"></div>
         </div>
