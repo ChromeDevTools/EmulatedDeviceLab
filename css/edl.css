@@ -6,6 +6,7 @@
     border-bottom: solid black 2px;
     padding: 5px;
     height: 30px;
+    width: 100%;
 }
 
 #navigation {
@@ -40,11 +41,11 @@ article {
 
 .device-list-item {
     background: black;
-    margin: 2px;
     border: solid black 5px;
     border-radius: 5px;
     display: inline-block;
     transition: all 300ms;
+    margin: 10px;
 }
 
 .device-list-item.selected {
