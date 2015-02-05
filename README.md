@@ -5,6 +5,6 @@ Work in progress.
 # TODO
 
 - [ ] Device artwork
-- [ ] Syncing URL
+- [x] Syncing URL
 - [ ] Syncing styles
-- [ ] Syncing interaction
+- [x] Syncing interaction (limited to what browser-sync gives us)
