@@ -98,6 +98,7 @@ article.device-selected .device-wrapper {
 
 .device-list-item.loading video {
     -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
     opacity: 0.7;
 }
 
@@ -155,72 +156,18 @@ article.device-selected .device-wrapper {
 Device artwork
 **/
 
-.device-apple-iphone-5, .device-apple-iphone-5-landscape, .device-google-nexus-5, .device-google-nexus-5-landscape, .device-apple-ipad-34, .device-apple-ipad-34-landscape {
+.artwork {
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
 }
 
-.device-apple-iphone-5 header h2, .device-apple-iphone-5-landscape header h2, .device-google-nexus-5 header h2, .device-google-nexus-5-landscape header h2, .device-apple-ipad-34 header h2, .device-apple-ipad-34-landscape header h2 {
+.artwork header h2 {
     display: none;
 }
 
-.device-apple-iphone-5 header .fa-cog, .device-apple-iphone-5-landscape header .fa-cog, .device-google-nexus-5 header .fa-cog, .device-google-nexus-5-landscape header .fa-cog, .device-apple-ipad-34 header .fa-cog, .device-apple-ipad-34-landscape header .fa-cog {
+.artwork header .fa-cog {
     right: 2px;
     top: 2px;
-}
-
-.device-apple-iphone-5 {
-    background-image: url('../device-art/iphone5-portrait.svg');
-
-    padding-left: 11px;
-    padding-right: 10px;
-    padding-top: 39px;
-    padding-bottom: 37px;
-}
-
-.device-apple-iphone-5-landscape {
-    background-image: url('../device-art/iphone5-landscape.svg');
-
-    padding-left: 38px;
-    padding-right: 39px;
-    padding-top: 10px;
-    padding-bottom: 8px;
-}
-
-.device-google-nexus-5 {
-    background-image: url('../device-art/nexus5-portrait.svg');
-
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 24px;
-    padding-bottom: 31px;
-}
-
-.device-google-nexus-5-landscape {
-    background-image: url('../device-art/nexus5-landscape.svg');
-
-    padding-left: 29px;
-    padding-right: 28px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-.device-apple-ipad-34 {
-    background-image: url('../device-art/ipad-portrait.svg');
-
-    padding-left: 21px;
-    padding-right: 18px;
-    padding-top: 40px;
-    padding-bottom: 38px;
-}
-
-.device-apple-ipad-34-landscape {
-    background-image: url('../device-art/ipad-landscape.svg');
-
-    padding-left: 41px;
-    padding-right: 43px;
-    padding-top: 23px;
-    padding-bottom: 15px;
 }
