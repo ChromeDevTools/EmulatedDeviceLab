@@ -102,12 +102,12 @@ article.device-selected .device-wrapper {
     opacity: 0.7;
 }
 
-.device-list-item .video-placeholder {
+.video-placeholder {
     display: inline-block;
     position: relative;
 }
 
-.device-list-item .video-placeholder .fa-plug {
+.video-placeholder .fa-plug {
     color: white;
     position: absolute;
     left: 50%;
@@ -144,12 +144,17 @@ article.device-selected .device-wrapper {
 
 .device-preview:focus {
     outline: 0;
-    box-shadow: 0 0 10px black;
+    -webkit-filter: drop-shadow(black 0px 0px 5px);
 }
 
 .device-preview .video-placeholder {
-    width: 320px;
-    height: 480px;
+    margin-left: -15px;
+    margin-top: -15px;
+    font-size: 30px;
+}
+
+.device-preview.streaming .video-placeholder {
+    display: none;
 }
 
 /**
@@ -159,7 +164,7 @@ Device artwork
 .artwork {
     background-color: transparent;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     border: none;
 }
 
