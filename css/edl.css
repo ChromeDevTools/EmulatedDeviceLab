@@ -117,6 +117,7 @@ article.device-selected .device-wrapper {
 .video-placeholder {
     display: inline-block;
     position: relative;
+    transition: all 300ms;
 }
 
 .video-placeholder .fa-plug {
