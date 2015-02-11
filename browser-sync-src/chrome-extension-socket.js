@@ -14,7 +14,7 @@ exports.getPath = function () {
  * @param data
  */
 exports.emit = function (name, data) {
-  console.log('emit', name, data);
+  //console.log('emit', name, data);
 
   data = data || {};
   data.url = exports.getPath();
@@ -23,8 +23,6 @@ exports.emit = function (name, data) {
     namespace: MSG_NAMESPACE,
     action: name,
     data: data
-  }, function(response) {
-    console.log('response', response);
   });
 };
 
@@ -37,7 +35,7 @@ exports.on = function (name, callback) {
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if(request.namespace && request.namespace === 'browser-sync' && request.action === name) {
-      console.log('sync', request.action, request.data);
+      //console.log('sync', request.action, request.data);
       callback(request.data);
     }
   });
