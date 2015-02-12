@@ -6,5 +6,5 @@ Work in progress.
 
 - [x] Device artwork
 - [x] Syncing URL
-- [ ] Syncing styles
-- [x] Syncing interaction (limited to what browser-sync gives us)
+- [x] Syncing styles (doesn't work with inline styles)
+- [x] Syncing interaction (browser-sync)

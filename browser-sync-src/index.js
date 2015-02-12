@@ -1,14 +1,14 @@
 "use strict";
 
-var socket       = require("./chrome-extension-socket");
-var shims        = require("./client-shims");
-var notify       = require("./notify");
-var codeSync     = require("./code-sync");
-var BrowserSync  = require("./browser-sync");
-var ghostMode    = require("./ghostmode");
-var emitter      = require("./emitter");
-var events       = require("./events");
-var utils        = require("./browser.utils").utils;
+var socket          = require("./chrome-extension-socket");
+var shims           = require("./client-shims");
+var notify          = require("./notify");
+var stylesheetSync  = require("./stylesheet-sync");
+var BrowserSync     = require("./browser-sync");
+var ghostMode       = require("./ghostmode");
+var emitter         = require("./emitter");
+var events          = require("./events");
+var utils           = require("./browser.utils").utils;
 
 var shouldReload = false;
 
@@ -29,7 +29,7 @@ exports.init = function (options) {
 
         // Always init on page load
         ghostMode.init(browserSync);
-        codeSync.init(browserSync);
+        stylesheetSync.init(browserSync);
 
         if (options.notify) {
             notify.init(browserSync);
