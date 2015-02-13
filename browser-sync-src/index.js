@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * This script should be injected and initialized only once.
+ * We make sure that this is true using global flag.
+ */
+if(window.___browserSyncInitialized___) {
+  return;
+}
+window.___browserSyncInitialized___ = true;
+
 var socket          = require("./chrome-extension-socket");
 var shims           = require("./client-shims");
 var notify          = require("./notify");
