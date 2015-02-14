@@ -9,6 +9,10 @@ h2 {
     right: 5px;
     margin: 0;
     color: #eee;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    pointer-events: none;
 }
 
 body {
@@ -102,6 +106,8 @@ article {
     display: inline-block;
     transition: all 300ms;
     margin: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 .device-list-item:focus {
