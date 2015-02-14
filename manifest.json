@@ -1,5 +1,6 @@
 {
   "name": "Emulated Device Lab",
+  "description": "Test simultaneously on multiple emulated devices.",
   "version": "0.1.0",
   "manifest_version": 2,
   "icons": {

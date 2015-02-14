@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Emulated Device Lab</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css"/>
     <link rel="stylesheet" type="text/css" href="css/edl.css"/>
 </head>
 <body>
+
+<h2>Emulated Device Lab</h2>
 
 <nav>
     <div id="new-device">
@@ -20,10 +25,10 @@
         <input class="url" type="text" value="http://www.smashingmagazine.com/"/>
     </div>
     <div id="zoom">
-        <i class="fa fa-search-minus zoom-out" title="Zoom out"></i>
+        <button class="zoom-out" title="Zoom out"><i class="fa fa-search-minus"></i></button>
         <span class="zoom-value"></span>
         <input type="range" min="0.1" max="1" value="0.3" step="0.1" class="zoom" title="Zoom level"/>
-        <i class="fa fa-search-plus zoom-in" title="Zoom in"></i>
+        <button class="zoom-in" title="Zoom in"><i class="fa fa-search-plus"></i></button>
     </div>
 </nav>
 

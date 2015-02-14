@@ -2,26 +2,77 @@
     box-sizing: border-box;
 }
 
-#new-device {
-    border-bottom: solid black 2px;
+h2 {
+    position: fixed;
+    z-index: -1;
+    bottom: 5px;
+    right: 5px;
+    margin: 0;
+    color: #eee;
+}
+
+body {
+    font-size: 1.5em;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222;
+    height: 100%;
+}
+
+nav {
+    display: flex;
+    background: rgba(255, 255, 255, 0.9);
     padding: 5px;
-    height: 30px;
-    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+nav > div {
+    padding-top: 1rem;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-right: 1px solid #eee;
+}
+
+nav > div:last-child {
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
+}
+
+nav button i.fa {
+    font-size: 20px;
+    vertical-align: -3px;
+}
+
+#new-device {
+    flex-grow: 1;
 }
 
 #navigation {
     display: flex;
-    border-bottom: solid black 2px;
-    padding: 5px;
-    height: 30px;
+    flex-grow: 99;
+}
+
+#navigation > input {
+    flex-grow: 99;
 }
 
 #navigation > button {
     margin-right: 5px;
 }
 
-#navigation > input {
-    flex-grow: 99;
+#zoom {
+    position: relative;
+    flex-grow: 1;
+}
+
+#zoom .zoom-value {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    bottom: 10px;
 }
 
 article {
@@ -42,29 +93,6 @@ article {
     align-items: center;
 
     padding-top: 10px;
-}
-
-.device-list nav {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 5px;
-    border-bottom-right-radius: 5px;
-    box-shadow: black 0 0 2px;
-}
-
-.device-list nav .zoom-value {
-    position: absolute;
-    text-align: center;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-size: 14px;
-    z-index: -1;
-    color: rgba(0,0,0,0.7);
 }
 
 .device-list-item {

@@ -1,10 +1,5 @@
 # Emulated Device Lab
 
-Work in progress.
+Chrome extension that allows simultaneous testing on multiple emulated devices.
 
-# TODO
-
-- [x] Device artwork
-- [x] Syncing URL
-- [x] Syncing styles (doesn't work with inline styles)
-- [x] Syncing interaction (browser-sync)
+![EDL Preview](http://i.imgur.com/BxjXKD4.png)
