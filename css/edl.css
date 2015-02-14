@@ -30,17 +30,6 @@ article {
     flex-wrap: nowrap;
 }
 
-article.device-selected .device-list {
-    border-right: solid black 2px;
-    flex-grow: 0;
-    flex-direction: column;
-}
-
-article.device-selected .device-wrapper {
-    display: block;
-    flex-grow: 1;
-}
-
 .device-list {
     position: relative;
     overflow: scroll;
@@ -73,7 +62,8 @@ article.device-selected .device-wrapper {
     margin: 10px;
 }
 
-.device-list-item.selected {
+.device-list-item:focus {
+    outline: 0;
     -webkit-filter: drop-shadow(black 0px 0px 5px);
 }
 
@@ -128,51 +118,6 @@ article.device-selected .device-wrapper {
     margin-left: -6px;
     margin-top: -6px;
 }
-
-.device-wrapper {
-    text-align: center;
-    flex-grow: 0;
-    display: none;
-    position: relative;
-}
-
-#close-preview {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    font-size: 30px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.device-preview {
-    background: black;
-    margin: 5px;
-    border: solid black 10px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-.device-preview:focus {
-    outline: 0;
-    -webkit-filter: drop-shadow(black 0px 0px 5px);
-}
-
-.device-preview .video-placeholder {
-    margin-left: -15px;
-    margin-top: -15px;
-    font-size: 30px;
-}
-
-.device-preview.streaming .video-placeholder {
-    display: none;
-}
-
-/**
-Device artwork
-**/
 
 .artwork {
     background-color: transparent;
