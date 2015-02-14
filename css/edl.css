@@ -40,6 +40,8 @@ article {
     flex-wrap: wrap;
 
     align-items: center;
+
+    padding-top: 10px;
 }
 
 .device-list nav {
@@ -47,10 +49,21 @@ article {
     left: 0;
     top: 0;
     z-index: 1;
-    font-size: 30px;
+    font-size: 20px;
     background: rgba(255, 255, 255, 0.8);
     padding: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.device-list nav .zoom-value {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    z-index: -1;
+    color: rgba(0,0,0,0.7);
 }
 
 .device-list-item {
@@ -83,25 +96,21 @@ article {
 
 .device-list-item header .fa-cog {
     color: white;
-    text-shadow: 0 0 1px black;
+    text-shadow: 0 0 2px black;
     position: absolute;
     right: 0;
     top: 0;
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms;
 }
 
 .device-list-item.loading .fa-cog {
-    display: inline-block;
+    opacity: 1;
 }
 
 .device-list-item video {
     transition: all 300ms;
-}
-
-.device-list-item.loading video {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    opacity: 0.7;
 }
 
 .video-placeholder {
