@@ -88,14 +88,7 @@ article {
 .device-list {
     position: relative;
     overflow: scroll;
-
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    flex-wrap: wrap;
-
     align-items: center;
-
     padding-top: 10px;
 }
 
