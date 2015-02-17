@@ -58,6 +58,10 @@ button i.fa {
     flex-grow: 1;
 }
 
+#new-device select {
+    max-width: 200px;
+}
+
 #navigation {
     display: flex;
     flex-grow: 99;
@@ -307,4 +311,37 @@ body.modal-open > .modal {
 .welcome-modal .step0 h3{
     padding-top: 90px;
     text-align: center;
+}
+
+@media (max-width: 1015px) {
+    button {
+        padding: 0 10px;
+    }
+
+    button i.fa {
+        font-size: 14px;
+        vertical-align: 0;
+    }
+
+    #new-device select {
+        max-width: 140px;
+    }
+
+    #zoom input {
+        width: 70px;
+    }
+}
+
+@media (max-width: 640px) {
+    #new-device select {
+        width: 70px;
+    }
+
+    #zoom input {
+        display: none;
+    }
+
+    #zoom .zoom-value {
+        bottom: -5px;
+    }
 }
