@@ -13,6 +13,7 @@ body {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
     height: 100%;
+    background: url(bg.png);
 }
 
 body > h2 {
@@ -81,11 +82,6 @@ button i.fa {
     left: 0;
     right: 0;
     bottom: 10px;
-}
-
-body > article {
-    min-height: 100%;
-    background: url(bg.png);
 }
 
 .device-list {
