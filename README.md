@@ -14,3 +14,10 @@ Chrome extension that allows simultaneous testing on multiple emulated devices.
 - Click on the EDL action button
 - Add devices
 - Right-click on each device window and select "Stream to EDL"
+
+# Used projects
+- Event syncing - https://github.com/BrowserSync/browser-sync-client
+- CSS framework - http://getskeleton.com/
+- Logo by http://www.google.com/design/
+- Icons by https://fortawesome.github.io
+- Background pattern by http://subtlepatterns.com/

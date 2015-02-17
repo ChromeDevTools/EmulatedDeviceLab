@@ -2,17 +2,8 @@
     box-sizing: border-box;
 }
 
-h2 {
-    position: fixed;
-    z-index: -1;
-    bottom: 5px;
-    right: 5px;
-    margin: 0;
-    color: #eee;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    pointer-events: none;
+html {
+    height: 100%;
 }
 
 body {
@@ -24,21 +15,34 @@ body {
     height: 100%;
 }
 
-nav {
+body > h2 {
+    position: fixed;
+    z-index: 1;
+    bottom: 5px;
+    right: 5px;
+    margin: 0;
+    color: #DADADA;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+body > nav {
     display: flex;
     background: rgba(255, 255, 255, 0.9);
     padding: 5px;
     border-bottom: 1px solid #eee;
 }
 
-nav > div {
+body > nav > div {
     padding-top: 1rem;
     padding-right: 5px;
     margin-right: 5px;
     border-right: 1px solid #eee;
 }
 
-nav > div:last-child {
+body > nav > div:last-child {
     padding-right: 0;
     margin-right: 0;
     border-right: none;
@@ -79,10 +83,9 @@ button i.fa {
     bottom: 10px;
 }
 
-article {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+body > article {
+    min-height: 100%;
+    background: url(bg.png);
 }
 
 .device-list {
@@ -90,6 +93,7 @@ article {
     overflow: scroll;
     align-items: center;
     padding-top: 10px;
+    z-index: 2;
 }
 
 .device-list-item {
@@ -172,11 +176,17 @@ article {
     top: 2px;
 }
 
+body > * {
+    transition: -webkit-filter 300ms, filter 300ms;
+}
+
 body.modal-open > * {
     -webkit-filter: blur(3px);
+    filter: blur(3px);
 }
 body.modal-open > .modal {
     -webkit-filter: none;
+    filter: none;
 }
 
 .modal {
@@ -186,6 +196,7 @@ body.modal-open > .modal {
     top: 0;
     bottom: 0;
     right: 0;
+    z-index: 1000;
 }
 
 .modal .fog-of-war {
@@ -194,12 +205,12 @@ body.modal-open > .modal {
     top: 0;
     bottom: 0;
     right: 0;
-    background: black;
+    background: rgb(186, 186, 186);
     opacity: 0.5;
 }
 
 .modal .content-wrapper {
-    width: 400px;
+    width: 450px;
     height: 300px;
 
     transition: all 300ms;
@@ -213,6 +224,8 @@ body.modal-open > .modal {
     background: white;
     border: solid #888 1px;
     border-radius: 4px;
+
+    overflow: scroll;
 }
 
 .modal .close {
@@ -228,4 +241,74 @@ body.modal-open > .modal {
 
 .modal.visible {
     display: block;
+}
+
+.welcome-modal .step {
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.welcome-modal .video-container {
+    position: relative;
+    margin-top: 50px;
+}
+
+.welcome-modal .video-container button.play {
+    opacity: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -39px;
+    margin-top: -18px;
+    background-color: white;
+
+    transition: opacity 300ms;
+}
+
+.welcome-modal .video-container.playing button.play {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.welcome-modal .step .video-container video {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    opacity: 0.5;
+    transition: opacity 100ms, -webkit-filter 100ms, filter 100ms;
+
+    background: #222;
+    border-radius: 4px;
+    border: solid #bbb 1px;
+    height: 300px;
+}
+
+.welcome-modal .step .video-container.playing video {
+    -webkit-filter: none;
+    filter: none;
+    opacity: 1;
+}
+
+.welcome-modal .step.visible {
+    display: block;
+}
+
+.welcome-modal button.next-step {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    margin: 0;
+}
+
+.welcome-modal span.count {
+    position: absolute;
+    left: 6px;
+    bottom: 0;
+    color: #eee;
+}
+
+.welcome-modal .step0 h3{
+    padding-top: 90px;
+    text-align: center;
 }
