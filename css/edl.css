@@ -44,7 +44,7 @@ nav > div:last-child {
     border-right: none;
 }
 
-nav button i.fa {
+button i.fa {
     font-size: 20px;
     vertical-align: -3px;
 }
@@ -170,4 +170,62 @@ article {
 .artwork header .fa-cog {
     right: 2px;
     top: 2px;
+}
+
+body.modal-open > * {
+    -webkit-filter: blur(3px);
+}
+body.modal-open > .modal {
+    -webkit-filter: none;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.modal .fog-of-war {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: black;
+    opacity: 0.5;
+}
+
+.modal .content-wrapper {
+    width: 400px;
+    height: 300px;
+
+    transition: all 300ms;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
+
+    background: white;
+    border: solid #888 1px;
+    border-radius: 4px;
+}
+
+.modal .close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.modal article {
+    width: 100%;
+    height: 100%;
+}
+
+.modal.visible {
+    display: block;
 }
