@@ -2,7 +2,7 @@
 
 Chrome extension that allows simultaneous testing on multiple emulated devices.
 
-![EDL Preview](http://i.imgur.com/BxjXKD4.png)
+![EDL Preview](http://i.imgur.com/B3581BC.png)
 
 # Features
 - syncs scroll, click and key events across all devices
