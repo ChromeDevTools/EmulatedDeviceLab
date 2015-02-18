@@ -34,6 +34,7 @@ body > nav {
     background: rgba(255, 255, 255, 0.9);
     padding: 5px;
     border-bottom: 1px solid #eee;
+    z-index: 11;
 }
 
 body > nav > div {
@@ -52,6 +53,11 @@ body > nav > div:last-child {
 button i.fa {
     font-size: 20px;
     vertical-align: -3px;
+}
+
+button i.fa.sml {
+    font-size: 14px;
+    vertical-align: -2px;
 }
 
 #new-device {
@@ -86,6 +92,31 @@ button i.fa {
     left: 0;
     right: 0;
     bottom: 10px;
+}
+
+.dropdown-menu {
+    transition: opacity 300ms;
+    opacity: 0;
+    pointer-events: none;
+
+    position: absolute;
+    right: 0;
+    background: white;
+    width: 190px;
+    padding: 5px;
+    border: solid #eee 1px;
+    margin-top: 10px;
+    border-bottom-left-radius: 4px;
+    z-index: 10;
+}
+
+.dropdown-menu.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dropdown-menu > button {
+    width: 100%;
 }
 
 .device-list {
