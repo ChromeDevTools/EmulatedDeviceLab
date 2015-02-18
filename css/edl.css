@@ -259,12 +259,6 @@ body.modal-open > .modal {
     overflow: scroll;
 }
 
-.modal .close {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-}
-
 .modal article {
     width: 100%;
     height: 100%;
@@ -338,6 +332,48 @@ body.modal-open > .modal {
 .welcome-modal .step0 h3{
     padding-top: 90px;
     text-align: center;
+}
+
+.device-manager-modal article {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.device-manager-modal .custom-devices {
+    width: 250px;
+    border-left: solid #eee 1px;
+    border-bottom: solid #eee 1px;
+    overflow: scroll;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.device-manager-modal .custom-devices > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.device-manager-modal .custom-devices > li > * {
+    align-self: center;
+}
+
+.device-manager-modal .custom-devices > li > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.device-manager-modal .custom-devices button {
+    margin-bottom: 0;
+}
+
+.device-manager-modal .custom-devices button.delete:hover {
+    color: darkred;
+    border-color: darkred;
 }
 
 @media (max-width: 1015px) {

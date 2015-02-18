@@ -55,7 +55,6 @@
     <div class="modal">
         <div class="fog-of-war"></div>
         <div class="content-wrapper">
-            <button class="close"><i class="fa fa-close"></i></button>
             <article></article>
         </div>
     </div>
@@ -89,7 +88,30 @@
     <button class="button-primary next-step"><i class="fa fa-arrow-right"></i></button>
 </template>
 <template id="device-manager-modal-tpl">
-    MGR!
+    <form>
+        <div>
+            <label for="device-name">Device name</label>
+            <input type="text" id="device-name" required>
+        </div>
+        <div>
+            <label for="screen-width">Screen size (px)</label>
+            <input type="number" min="100" max="10000" value="320" id="screen-width" /> x
+            <input type="number" min="100" max="10000" value="480" id="screen-height" />
+        </div>
+        <div>
+            <label for="device-scale-factor">Device scale factor</label>
+            <input type="number" min="1" max="10" value="2" id="device-scale-factor" />
+        </div>
+        <div>
+            <label for="user-agent">User agent</label>
+            <input type="text" id="user-agent" required />
+        </div>
+        <button type='submit' class="button-primary create">Create</button>
+    </form>
+    <ul class="custom-devices"></ul>
+</template>
+<template id="device-manager-modal-device-tpl">
+    <span></span><button class="delete" title="Delete device"><i class="fa fa-trash-o"></i></button>
 </template>
 
 <script src="jspm_packages/traceur.js"></script>
