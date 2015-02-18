@@ -105,6 +105,7 @@ button i.fa {
     margin: 10px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
+    vertical-align: middle;
 }
 
 .device-list-item:focus {
