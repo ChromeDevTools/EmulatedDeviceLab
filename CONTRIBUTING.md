@@ -1,0 +1,1 @@
+Before reporting a bug, please **read the [FAQ](https://github.com/kdzwinel/EmulatedDeviceLab/wiki/FAQ)** and check if bug wasn't already reported.
