@@ -376,6 +376,10 @@ body.modal-open > .modal {
     border-color: darkred;
 }
 
+.device-manager-modal i.info {
+    color: #241B77;
+}
+
 @media (max-width: 1015px) {
     button {
         padding: 0 10px;
