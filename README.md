@@ -9,8 +9,13 @@ Chrome extension that allows simultaneous testing on multiple emulated devices.
 - syncs stylesheet changes
 - provides single page where all devices can be managed
 
+## Installation
+- Go to chrome://extensions, or Window > Extensions from the Chrome File Menu.
+- Enable 'Developer Mode' by clicking the box in the upper right.
+- Click 'Load unpacked extension'.
+- Point the file browser to the directory you cloned EmulatedDeviceLab to.
+
 ## Usage
-- Install extension
 - Click on the EDL action button
 - Add devices
 - Right-click on each device window and select "Stream to EDL"
