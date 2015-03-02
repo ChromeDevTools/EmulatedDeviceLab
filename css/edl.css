@@ -311,6 +311,10 @@ body.modal-open > .modal {
     opacity: 1;
 }
 
+.welcome-modal .step .video-container button {
+  padding: 0 30px;
+}
+
 .welcome-modal .step.visible {
     display: block;
 }
