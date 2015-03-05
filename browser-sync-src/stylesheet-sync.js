@@ -58,8 +58,8 @@ exports.updateStylesheet = function (bs, data) {
     var parent = stylesheetElem.parentElement;
 
     var replacement = document.createElement('style');
-    replacement.dataset.originalHref = stylesheetElem.getAttribute('href') || stylesheetElem.dataset.originalHref;
-    replacement.innerText = data.content;
+    replacement.dataset.originalHref = stylesheetElem.href || stylesheetElem.dataset.originalHref;
+    replacement.textContent = data.content;
 
     parent.replaceChild(replacement, stylesheetElem);
   }
