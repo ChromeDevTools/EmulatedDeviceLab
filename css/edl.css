@@ -384,7 +384,7 @@ body.modal-open > .modal {
 }
 
 .device-manager-modal i.info {
-    color: #241B77;
+    color: #888;
 }
 
 @media (max-width: 1015px) {
