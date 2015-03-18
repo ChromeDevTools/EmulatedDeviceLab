@@ -52,9 +52,9 @@ define(function() {
 		this._async = async;
 		this._running = false;
 
-		this._queue = new Array(1<<16);
+		this._queue = this;
 		this._queueLen = 0;
-		this._afterQueue = new Array(1<<4);
+		this._afterQueue = {};
 		this._afterQueueLen = 0;
 
 		var self = this;
@@ -126,6 +126,7 @@ define(function(require) {
 	var format = require('../format');
 
 	return function unhandledRejection(Promise) {
+
 		var logError = noop;
 		var logInfo = noop;
 		var localConsole;
@@ -345,6 +346,7 @@ define(function() {
 	return function makePromise(environment) {
 
 		var tasks = environment.scheduler;
+		var emitRejection = initEmitRejection();
 
 		var objectCreate = Object.create ||
 			function(proto) {
@@ -811,7 +813,8 @@ define(function() {
 
 		Pending.prototype.run = function() {
 			var q = this.consumers;
-			var handler = this.join();
+			var handler = this.handler;
+			this.handler = this.handler.join();
 			this.consumers = void 0;
 
 			for (var i = 0; i < q.length; ++i) {
@@ -973,6 +976,8 @@ define(function() {
 		};
 
 		Rejected.prototype.fail = function(context) {
+			this.reported = true;
+			emitRejection('unhandledRejection', this);
 			Promise.onFatalRejection(this, context === void 0 ? this.context : context);
 		};
 
@@ -982,9 +987,10 @@ define(function() {
 		}
 
 		ReportTask.prototype.run = function() {
-			if(!this.rejection.handled) {
+			if(!this.rejection.handled && !this.rejection.reported) {
 				this.rejection.reported = true;
-				Promise.onPotentiallyUnhandledRejection(this.rejection, this.context);
+				emitRejection('unhandledRejection', this.rejection) ||
+					Promise.onPotentiallyUnhandledRejection(this.rejection, this.context);
 			}
 		};
 
@@ -994,14 +1000,14 @@ define(function() {
 
 		UnreportTask.prototype.run = function() {
 			if(this.rejection.reported) {
-				Promise.onPotentiallyUnhandledRejectionHandled(this.rejection);
+				emitRejection('rejectionHandled', this.rejection) ||
+					Promise.onPotentiallyUnhandledRejectionHandled(this.rejection);
 			}
 		};
 
 		// Unhandled rejection hooks
 		// By default, everything is a noop
 
-		// TODO: Better names: "annotate"?
 		Promise.createContext
 			= Promise.enterContext
 			= Promise.exitContext
@@ -1213,6 +1219,45 @@ define(function() {
 		}
 
 		function noop() {}
+
+		function initEmitRejection() {
+			/*global process, self, CustomEvent*/
+			if(typeof process !== 'undefined' && process !== null
+				&& typeof process.emit === 'function') {
+				// Returning falsy here means to call the default
+				// onPotentiallyUnhandledRejection API.  This is safe even in
+				// browserify since process.emit always returns falsy in browserify:
+				// https://github.com/defunctzombie/node-process/blob/master/browser.js#L40-L46
+				return function(type, rejection) {
+					return type === 'unhandledRejection'
+						? process.emit(type, rejection.value, rejection)
+						: process.emit(type, rejection);
+				};
+			} else if(typeof self !== 'undefined' && typeof CustomEvent === 'function') {
+				return (function(noop, self, CustomEvent) {
+					var hasCustomEvent = false;
+					try {
+						var ev = new CustomEvent('unhandledRejection');
+						hasCustomEvent = ev instanceof CustomEvent;
+					} catch (e) {}
+
+					return !hasCustomEvent ? noop : function(type, rejection) {
+						var ev = new CustomEvent(type, {
+							detail: {
+								reason: rejection.value,
+								key: rejection
+							},
+							bubbles: false,
+							cancelable: true
+						});
+
+						return !self.dispatchEvent(ev);
+					};
+				}(noop, self, CustomEvent));
+			}
+
+			return noop;
+		}
 
 		return Promise;
 	};
@@ -1512,8 +1557,7 @@ function logloads(loads) {
 
         // instead of load.kind, use load.isDeclarative
         load.isDeclarative = true;
-        // parse sets load.declare, load.depsList
-        loader.loaderObj.parse(load);
+        __eval(loader.loaderObj.transpile(load), __global, load);
       }
       else if (typeof instantiateResult == 'object') {
         load.depsList = instantiateResult.deps || [];
@@ -1607,6 +1651,12 @@ function logloads(loads) {
       for (var i = 0, l = loader.loads.length; i < l; i++) {
         if (loader.loads[i].name == name) {
           existingLoad = loader.loads[i];
+
+          if(step == 'translate' && !existingLoad.source) {
+            existingLoad.address = stepState.moduleAddress;
+            proceedToTranslate(loader, existingLoad, Promise.resolve(stepState.moduleSource));
+          }
+
           return existingLoad.linkSets[0].done.then(function() {
             resolve(existingLoad);
           });
@@ -2160,7 +2210,6 @@ function logloads(loads) {
     });
 
     // 26.3.3.13 realm not implemented
-    this.traceurOptions = {};
   }
 
   function Module() {}
@@ -2309,75 +2358,12 @@ function logloads(loads) {
     translate: function(load) {
       return load.source;
     },
-    parse: function(load) {
-      throw new TypeError('Loader.parse is not implemented');
-    },
     // 26.3.3.18.5
     instantiate: function(load) {
     }
   };
 
   var _newModule = Loader.prototype.newModule;
-
-
-  /*
-   * Traceur-specific Parsing Code for Loader
-   */
-  (function() {
-    // parse function is used to parse a load record
-    // Returns an array of ModuleSpecifiers
-    var traceur;
-
-    function doCompile(source, compiler, filename) {
-      try {
-        return compiler.compile(source, filename);
-      }
-      catch(e) {
-        // traceur throws an error array
-        throw e[0];
-      }
-    }
-    Loader.prototype.parse = function(load) {
-      if (!traceur) {
-        if (typeof window == 'undefined' &&
-           typeof WorkerGlobalScope == 'undefined')
-          traceur = require('traceur');
-        else if (__global.traceur)
-          traceur = __global.traceur;
-        else
-          throw new TypeError('Include Traceur for module syntax support');
-      }
-
-      console.assert(load.source, 'Non-empty source');
-
-      load.isDeclarative = true;
-
-      var options = this.traceurOptions || {};
-      options.modules = 'instantiate';
-      options.script = false;
-      options.sourceMaps = 'inline';
-      options.filename = load.address;
-
-      var compiler = new traceur.Compiler(options);
-
-      var source = doCompile(load.source, compiler, options.filename);
-
-      if (!source)
-        throw new Error('Error evaluating module ' + load.address);
-
-      var sourceMap = compiler.getSourceMap();
-
-      if (__global.btoa && sourceMap) {
-        // add "!eval" to end of Traceur sourceURL
-        // I believe this does something?
-        source += '!eval';
-      }
-
-      source = 'var __moduleAddress = "' + load.address + '";' + source;
-
-      __eval(source, __global, load);
-    }
-  })();
 
   if (typeof exports === 'object')
     module.exports = Loader;
@@ -2390,6 +2376,79 @@ function logloads(loads) {
 })();
 
 /*
+ * Traceur and Babel transpile hook for Loader
+ */
+(function(Loader) {
+  // Returns an array of ModuleSpecifiers
+  var transpiler, transpilerModule;
+  var isNode = typeof window == 'undefined' && typeof WorkerGlobalScope == 'undefined';
+
+  // use Traceur by default
+  Loader.prototype.transpiler = 'traceur';
+
+  Loader.prototype.transpile = function(load) {
+    if (!transpiler) {
+      if (this.transpiler == 'babel') {
+        transpiler = babelTranspile;
+        transpilerModule = isNode ? require('babel-core') : __global.babel;
+      }
+      else {
+        transpiler = traceurTranspile;
+        transpilerModule = isNode ? require('traceur') : __global.traceur;
+      }
+      
+      if (!transpilerModule)
+        throw new TypeError('Include Traceur or Babel for module syntax support.');
+    }
+
+    return 'var __moduleAddress = "' + load.address + '";' + transpiler.call(this, load);
+  }
+
+  function traceurTranspile(load) {
+    var options = this.traceurOptions || {};
+    options.modules = 'instantiate';
+    options.script = false;
+    options.sourceMaps = 'inline';
+    options.filename = load.address;
+
+    var compiler = new transpilerModule.Compiler(options);
+    var source = doTraceurCompile(load.source, compiler, options.filename);
+
+    // add "!eval" to end of Traceur sourceURL
+    // I believe this does something?
+    source += '!eval';
+
+    return source;
+  }
+  function doTraceurCompile(source, compiler, filename) {
+    try {
+      return compiler.compile(source, filename);
+    }
+    catch(e) {
+      // traceur throws an error array
+      throw e[0];
+    }
+  }
+
+  function babelTranspile(load) {
+    var options = this.babelOptions || {};
+    options.modules = 'system';
+    options.sourceMap = 'inline';
+    options.filename = load.address;
+    options.code = true;
+    options.ast = false;
+    options.blacklist = options.blacklist || [];
+    options.blacklist.push('react');
+
+    var source = transpilerModule.transform(load.source, options).code;
+
+    // add "!eval" to end of Babel sourceURL
+    // I believe this does something?
+    return source + '\n//# sourceURL=' + load.address + '!eval';
+  }
+
+
+})(__global.LoaderPolyfill);/*
 *********************************************************************************************
 
   System Loader Implementation
