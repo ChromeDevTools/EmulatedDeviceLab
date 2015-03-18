@@ -90,8 +90,10 @@ button i.fa.sml {
     position: absolute;
     text-align: center;
     left: 0;
-    right: 0;
+    right: 5px;
     bottom: 10px;
+    /* it partially covers the buttons */
+    pointer-events: none;
 }
 
 .dropdown-menu {
