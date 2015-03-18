@@ -8,7 +8,7 @@
     "128": "icons/128.png"
   },
   "permissions": ["<all_urls>", "tabs", "tabCapture", "debugger", "contextMenus", "storage"],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
   "background": {
     "persistent": true,
     "page": "background.html"
