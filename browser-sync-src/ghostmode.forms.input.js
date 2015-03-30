@@ -13,7 +13,7 @@ exports.canEmitEvents = true;
  * @param eventManager
  */
 exports.init = function (bs, eventManager) {
-    eventManager.addEvent(document.body, "keyup", exports.browserEvent(bs));
+    eventManager.addEvent(document.body, "input", exports.browserEvent(bs));
     bs.socket.on(EVENT_NAME, exports.socketEvent(bs, eventManager));
 };
 
