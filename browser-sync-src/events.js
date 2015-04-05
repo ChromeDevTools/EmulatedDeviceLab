@@ -152,7 +152,8 @@ exports._EventManager = function (cache) {
 
         if (data.handlers[type].length == 1) {
             if (document.addEventListener) {
-                elem.addEventListener(type, data.dispatcher, false);
+                //catch events in the capturing phase
+                elem.addEventListener(type, data.dispatcher, true);
             }
             else if (document.attachEvent) {
                 elem.attachEvent("on" + type, data.dispatcher);
