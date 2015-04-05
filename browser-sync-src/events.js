@@ -1,31 +1,31 @@
 exports._ElementCache = function () {
 
-    var cache = {},
-        guidCounter = 1,
-        expando = "data" + (new Date).getTime();
+  var cache = {},
+    guidCounter = 1,
+    expando = "data" + (new Date).getTime();
 
-    this.getData = function (elem) {
-        var guid = elem[expando];
-        if (!guid) {
-            guid = elem[expando] = guidCounter++;
-            cache[guid] = {};
-        }
-        return cache[guid];
-    };
+  this.getData = function (elem) {
+    var guid = elem[expando];
+    if (!guid) {
+      guid = elem[expando] = guidCounter++;
+      cache[guid] = {};
+    }
+    return cache[guid];
+  };
 
-    this.removeData = function (elem) {
-        var guid = elem[expando];
-        if (!guid) return;
-        delete cache[guid];
-        try {
-            delete elem[expando];
-        }
-        catch (e) {
-            if (elem.removeAttribute) {
-                elem.removeAttribute(expando);
-            }
-        }
-    };
+  this.removeData = function (elem) {
+    var guid = elem[expando];
+    if (!guid) return;
+    delete cache[guid];
+    try {
+      delete elem[expando];
+    }
+    catch (e) {
+      if (elem.removeAttribute) {
+        elem.removeAttribute(expando);
+      }
+    }
+  };
 };
 
 /**
@@ -35,83 +35,83 @@ exports._ElementCache = function () {
  */
 exports._fixEvent = function (event) {
 
-    function returnTrue() {
-        return true;
+  function returnTrue() {
+    return true;
+  }
+
+  function returnFalse() {
+    return false;
+  }
+
+  if (!event || !event.stopPropagation) {
+    var old = event || window.event;
+
+    // Clone the old object so that we can modify the values
+    event = {};
+
+    for (var prop in old) {
+      event[prop] = old[prop];
     }
 
-    function returnFalse() {
-        return false;
+    // The event occurred on this element
+    if (!event.target) {
+      event.target = event.srcElement || document;
     }
 
-    if (!event || !event.stopPropagation) {
-        var old = event || window.event;
+    // Handle which other element the event is related to
+    event.relatedTarget = event.fromElement === event.target ?
+      event.toElement :
+      event.fromElement;
 
-        // Clone the old object so that we can modify the values
-        event = {};
+    // Stop the default browser action
+    event.preventDefault = function () {
+      event.returnValue = false;
+      event.isDefaultPrevented = returnTrue;
+    };
 
-        for (var prop in old) {
-            event[prop] = old[prop];
-        }
+    event.isDefaultPrevented = returnFalse;
 
-        // The event occurred on this element
-        if (!event.target) {
-            event.target = event.srcElement || document;
-        }
+    // Stop the event from bubbling
+    event.stopPropagation = function () {
+      event.cancelBubble = true;
+      event.isPropagationStopped = returnTrue;
+    };
 
-        // Handle which other element the event is related to
-        event.relatedTarget = event.fromElement === event.target ?
-            event.toElement :
-            event.fromElement;
+    event.isPropagationStopped = returnFalse;
 
-        // Stop the default browser action
-        event.preventDefault = function () {
-            event.returnValue = false;
-            event.isDefaultPrevented = returnTrue;
-        };
+    // Stop the event from bubbling and executing other handlers
+    event.stopImmediatePropagation = function () {
+      this.isImmediatePropagationStopped = returnTrue;
+      this.stopPropagation();
+    };
 
-        event.isDefaultPrevented = returnFalse;
+    event.isImmediatePropagationStopped = returnFalse;
 
-        // Stop the event from bubbling
-        event.stopPropagation = function () {
-            event.cancelBubble = true;
-            event.isPropagationStopped = returnTrue;
-        };
+    // Handle mouse position
+    if (event.clientX != null) {
+      var doc = document.documentElement, body = document.body;
 
-        event.isPropagationStopped = returnFalse;
-
-        // Stop the event from bubbling and executing other handlers
-        event.stopImmediatePropagation = function () {
-            this.isImmediatePropagationStopped = returnTrue;
-            this.stopPropagation();
-        };
-
-        event.isImmediatePropagationStopped = returnFalse;
-
-        // Handle mouse position
-        if (event.clientX != null) {
-            var doc = document.documentElement, body = document.body;
-
-            event.pageX = event.clientX +
-            (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-            (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-            (doc && doc.scrollTop || body && body.scrollTop || 0) -
-            (doc && doc.clientTop || body && body.clientTop || 0);
-        }
-
-        // Handle key presses
-        event.which = event.charCode || event.keyCode;
-
-        // Fix button for mouse clicks:
-        // 0 == left; 1 == middle; 2 == right
-        if (event.button != null) {
-            event.button = (event.button & 1 ? 0 :
-                (event.button & 4 ? 1 :
-                    (event.button & 2 ? 2 : 0)));
-        }
+      event.pageX = event.clientX +
+      (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+      (doc && doc.clientLeft || body && body.clientLeft || 0);
+      event.pageY = event.clientY +
+      (doc && doc.scrollTop || body && body.scrollTop || 0) -
+      (doc && doc.clientTop || body && body.clientTop || 0);
     }
 
-    return event;
+    // Handle key presses
+    event.which = event.charCode || event.keyCode;
+
+    // Fix button for mouse clicks:
+    // 0 == left; 1 == middle; 2 == right
+    if (event.button != null) {
+      event.button = (event.button & 1 ? 0 :
+        (event.button & 4 ? 1 :
+          (event.button & 2 ? 2 : 0)));
+    }
+  }
+
+  return event;
 };
 
 /**
@@ -119,128 +119,128 @@ exports._fixEvent = function (event) {
  */
 exports._EventManager = function (cache) {
 
-    var nextGuid = 1;
+  var nextGuid = 1;
 
-    this.addEvent = function (elem, type, fn) {
+  this.addEvent = function (elem, type, fn) {
 
-        var data = cache.getData(elem);
+    var data = cache.getData(elem);
 
-        if (!data.handlers) data.handlers = {};
+    if (!data.handlers) data.handlers = {};
 
-        if (!data.handlers[type])
-            data.handlers[type] = [];
+    if (!data.handlers[type])
+      data.handlers[type] = [];
 
-        if (!fn.guid) fn.guid = nextGuid++;
+    if (!fn.guid) fn.guid = nextGuid++;
 
-        data.handlers[type].push(fn);
+    data.handlers[type].push(fn);
 
-        if (!data.dispatcher) {
-            data.disabled = false;
-            data.dispatcher = function (event) {
+    if (!data.dispatcher) {
+      data.disabled = false;
+      data.dispatcher = function (event) {
 
-                if (data.disabled) return;
-                event = exports._fixEvent(event);
+        if (data.disabled) return;
+        event = exports._fixEvent(event);
 
-                var handlers = data.handlers[event.type];
-                if (handlers) {
-                    for (var n = 0; n < handlers.length; n++) {
-                        handlers[n].call(elem, event);
-                    }
-                }
-            };
+        var handlers = data.handlers[event.type];
+        if (handlers) {
+          for (var n = 0; n < handlers.length; n++) {
+            handlers[n].call(elem, event);
+          }
         }
-
-        if (data.handlers[type].length == 1) {
-            if (document.addEventListener) {
-                elem.addEventListener(type, data.dispatcher, false);
-            }
-            else if (document.attachEvent) {
-                elem.attachEvent("on" + type, data.dispatcher);
-            }
-        }
-
-    };
-
-    function tidyUp(elem, type) {
-
-        function isEmpty(object) {
-            for (var prop in object) {
-                return false;
-            }
-            return true;
-        }
-
-        var data = cache.getData(elem);
-
-        if (data.handlers[type].length === 0) {
-
-            delete data.handlers[type];
-
-            if (document.removeEventListener) {
-                elem.removeEventListener(type, data.dispatcher, false);
-            }
-            else if (document.detachEvent) {
-                elem.detachEvent("on" + type, data.dispatcher);
-            }
-        }
-
-        if (isEmpty(data.handlers)) {
-            delete data.handlers;
-            delete data.dispatcher;
-        }
-
-        if (isEmpty(data)) {
-            cache.removeData(elem);
-        }
+      };
     }
 
-    this.removeEvent = function (elem, type, fn) {
+    if (data.handlers[type].length == 1) {
+      if (document.addEventListener) {
+        //catch events in the capturing phase
+        elem.addEventListener(type, data.dispatcher, true);
+      }
+      else if (document.attachEvent) {
+        elem.attachEvent("on" + type, data.dispatcher);
+      }
+    }
 
-        var data = cache.getData(elem);
+  };
 
-        if (!data.handlers) return;
+  function tidyUp(elem, type) {
 
-        var removeType = function (t) {
-            data.handlers[t] = [];
-            tidyUp(elem, t);
-        };
+    function isEmpty(object) {
+      for (var prop in object) {
+        return false;
+      }
+      return true;
+    }
 
-        if (!type) {
-            for (var t in data.handlers) removeType(t);
-            return;
-        }
+    var data = cache.getData(elem);
 
-        var handlers = data.handlers[type];
-        if (!handlers) return;
+    if (data.handlers[type].length === 0) {
 
-        if (!fn) {
-            removeType(type);
-            return;
-        }
+      delete data.handlers[type];
 
-        if (fn.guid) {
-            for (var n = 0; n < handlers.length; n++) {
-                if (handlers[n].guid === fn.guid) {
-                    handlers.splice(n--, 1);
-                }
-            }
-        }
-        tidyUp(elem, type);
+      if (document.removeEventListener) {
+        elem.removeEventListener(type, data.dispatcher, false);
+      }
+      else if (document.detachEvent) {
+        elem.detachEvent("on" + type, data.dispatcher);
+      }
+    }
 
+    if (isEmpty(data.handlers)) {
+      delete data.handlers;
+      delete data.dispatcher;
+    }
+
+    if (isEmpty(data)) {
+      cache.removeData(elem);
+    }
+  }
+
+  this.removeEvent = function (elem, type, fn) {
+
+    var data = cache.getData(elem);
+
+    if (!data.handlers) return;
+
+    var removeType = function (t) {
+      data.handlers[t] = [];
+      tidyUp(elem, t);
     };
 
-    this.proxy = function (context, fn) {
-        if (!fn.guid) {
-            fn.guid = nextGuid++;
+    if (!type) {
+      for (var t in data.handlers) removeType(t);
+      return;
+    }
+
+    var handlers = data.handlers[type];
+    if (!handlers) return;
+
+    if (!fn) {
+      removeType(type);
+      return;
+    }
+
+    if (fn.guid) {
+      for (var n = 0; n < handlers.length; n++) {
+        if (handlers[n].guid === fn.guid) {
+          handlers.splice(n--, 1);
         }
-        var ret = function () {
-            return fn.apply(context, arguments);
-        };
-        ret.guid = fn.guid;
-        return ret;
+      }
+    }
+    tidyUp(elem, type);
+
+  };
+
+  this.proxy = function (context, fn) {
+    if (!fn.guid) {
+      fn.guid = nextGuid++;
+    }
+    var ret = function () {
+      return fn.apply(context, arguments);
     };
+    ret.guid = fn.guid;
+    return ret;
+  };
 };
-
 
 
 /**
@@ -249,27 +249,27 @@ exports._EventManager = function (cache) {
  */
 exports.triggerClick = function (elem) {
 
-    var evObj;
+  var evObj;
 
-    if (document.createEvent) {
-        window.setTimeout(function () {
-            evObj = document.createEvent("MouseEvents");
-            evObj.initEvent("click", true, true);
-            elem.dispatchEvent(evObj);
-        }, 0);
-    } else {
-        window.setTimeout(function () {
-            if (document.createEventObject) {
-                evObj = document.createEventObject();
-                evObj.cancelBubble = true;
-                elem.fireEvent("on" + "click", evObj);
-            }
-        }, 0);
-    }
+  if (document.createEvent) {
+    window.setTimeout(function () {
+      evObj = document.createEvent("MouseEvents");
+      evObj.initEvent("click", true, true);
+      elem.dispatchEvent(evObj);
+    }, 0);
+  } else {
+    window.setTimeout(function () {
+      if (document.createEventObject) {
+        evObj = document.createEventObject();
+        evObj.cancelBubble = true;
+        elem.fireEvent("on" + "click", evObj);
+      }
+    }, 0);
+  }
 };
 
-exports.triggerTouch = function(elem, type) {
-  if(document.createEvent) {
+exports.triggerTouch = function (elem, type) {
+  if (document.createEvent) {
     var e = document.createEvent('UIEvent');
 
     var screenX = 0,
@@ -287,11 +287,20 @@ exports.triggerTouch = function(elem, type) {
   }
 };
 
+exports.triggerHTMLEvent = function (elem, eventType) {
+  if (document.createEvent) {
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent(eventType, true, true);
+    elem.dispatchEvent(evt);
+  }
+};
+
 var cache = new exports._ElementCache();
 var eventManager = new exports._EventManager(cache);
 
 eventManager.triggerClick = exports.triggerClick;
 eventManager.triggerTouch = exports.triggerTouch;
+eventManager.triggerHTMLEvent = exports.triggerHTMLEvent;
 
 exports.manager = eventManager;
 
