@@ -46,9 +46,10 @@ exports.browserEvent = function (bs) {
 
 /**
  * @param {BrowserSync} bs
+ * @param {manager} eventManager
  * @returns {Function}
  */
-exports.socketEvent = function (bs) {
+exports.socketEvent = function (bs, eventManager) {
 
     return function (data) {
 
@@ -60,6 +61,7 @@ exports.socketEvent = function (bs) {
 
         if (elem) {
             elem.value = data.value;
+            eventManager.triggerHTMLEvent(elem, 'input');
             return elem;
         }
 
