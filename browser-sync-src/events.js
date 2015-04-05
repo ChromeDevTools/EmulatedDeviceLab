@@ -268,7 +268,7 @@ exports.triggerClick = function (elem) {
     }
 };
 
-function triggerTouch(elem, type) {
+exports.triggerTouch = function(elem, type) {
   if(document.createEvent) {
     var e = document.createEvent('UIEvent');
 
@@ -277,7 +277,7 @@ function triggerTouch(elem, type) {
       pageX = 0,
       pageY = 0;
 
-    e.initEvent("touch" + type, true, true);
+    e.initEvent(type, true, true);
 
     e.touches = document.createTouchList(
       document.createTouch(window, elem, 0, pageX, pageY, screenX, screenY)
@@ -285,28 +285,13 @@ function triggerTouch(elem, type) {
 
     elem.dispatchEvent(e);
   }
-}
-
-exports.triggerTouchStart = function (elem) {
-  triggerTouch(elem, 'start');
-};
-
-exports.triggerTouchMove = function (elem) {
-  triggerTouch(elem, 'move');
-};
-
-exports.triggerTouchEnd = function (elem) {
-  triggerTouch(elem, 'end');
-};
-
-exports.triggerTouchCancel = function (elem) {
-  triggerTouch(elem, 'cancel');
 };
 
 var cache = new exports._ElementCache();
 var eventManager = new exports._EventManager(cache);
 
 eventManager.triggerClick = exports.triggerClick;
+eventManager.triggerTouch = exports.triggerTouch;
 
 exports.manager = eventManager;
 

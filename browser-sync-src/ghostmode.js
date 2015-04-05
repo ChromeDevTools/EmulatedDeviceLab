@@ -5,6 +5,7 @@ var eventManager = require("./events").manager;
 exports.plugins = {
     "scroll":   require("./ghostmode.scroll"),
     "clicks":   require("./ghostmode.clicks"),
+    "touch":    require("./ghostmode.touch"),
     "forms":    require("./ghostmode.forms"),
     "location": require("./ghostmode.location")
 };
