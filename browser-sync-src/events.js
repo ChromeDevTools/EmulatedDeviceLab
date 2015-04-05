@@ -269,10 +269,19 @@ exports.triggerClick = function (elem) {
     }
 };
 
+exports.triggerHTMLEvent = function (elem, eventType) {
+  if (document.createEvent) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent(eventType, true, true);
+      elem.dispatchEvent(evt);
+  }
+};
+
 var cache = new exports._ElementCache();
 var eventManager = new exports._EventManager(cache);
 
 eventManager.triggerClick = exports.triggerClick;
+eventManager.triggerHTMLEvent = exports.triggerHTMLEvent;
 
 exports.manager = eventManager;
 
