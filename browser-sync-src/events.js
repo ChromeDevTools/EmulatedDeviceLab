@@ -268,6 +268,41 @@ exports.triggerClick = function (elem) {
     }
 };
 
+function triggerTouch(elem, type) {
+  if(document.createEvent) {
+    var e = document.createEvent('UIEvent');
+
+    var screenX = 0,
+      screenY = 0,
+      pageX = 0,
+      pageY = 0;
+
+    e.initEvent("touch" + type, true, true);
+
+    e.touches = document.createTouchList(
+      document.createTouch(window, elem, 0, pageX, pageY, screenX, screenY)
+    );
+
+    elem.dispatchEvent(e);
+  }
+}
+
+exports.triggerTouchStart = function (elem) {
+  triggerTouch(elem, 'start');
+};
+
+exports.triggerTouchMove = function (elem) {
+  triggerTouch(elem, 'move');
+};
+
+exports.triggerTouchEnd = function (elem) {
+  triggerTouch(elem, 'end');
+};
+
+exports.triggerTouchCancel = function (elem) {
+  triggerTouch(elem, 'cancel');
+};
+
 var cache = new exports._ElementCache();
 var eventManager = new exports._EventManager(cache);
 
