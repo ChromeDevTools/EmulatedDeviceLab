@@ -27,5 +27,5 @@ Before reporting a bug, please **read the [FAQ](https://github.com/kdzwinel/Emul
 - Event syncing - https://github.com/BrowserSync/browser-sync-client
 - CSS framework - http://getskeleton.com/
 - Logo by http://www.google.com/design/
-- Icons by https://fortawesome.github.io
+- Icons by https://fortawesome.github.io/Font-Awesome/
 - Background pattern by http://subtlepatterns.com/
