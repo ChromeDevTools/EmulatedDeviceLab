@@ -179,6 +179,45 @@ button i.fa.sml {
     transition: all 300ms;
 }
 
+.device-menu {
+    position: absolute;
+    right: 0;
+    top: -7px;
+    opacity: 0;
+    transition: opacity 300ms;
+    z-index: 10;
+    line-height: 15px;
+}
+
+.device-menu > i {
+    cursor: pointer;
+    color: white;
+}
+
+.device-list-item:hover .device-menu, .device-menu.visible {
+    opacity: 1;
+}
+
+.device-menu > nav {
+    display: none;
+    background: white;
+    position: absolute;
+    width: 130px;
+    right: 0;
+    padding: 5px;
+    border: solid #eee 1px;
+    border-bottom-left-radius: 4px;
+}
+
+.device-menu > nav > button {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.device-menu.visible > nav {
+    display: block;
+}
+
 .video-placeholder {
     display: inline-block;
     position: relative;
@@ -208,6 +247,11 @@ button i.fa.sml {
 .artwork header .fa-cog {
     right: 2px;
     top: 2px;
+}
+
+.artwork .device-menu {
+    top: -17px;
+    right: 2px;
 }
 
 body > * {
@@ -314,7 +358,7 @@ body.modal-open > .modal {
 }
 
 .welcome-modal .step .video-container button {
-  padding: 0 30px;
+    padding: 0 30px;
 }
 
 .welcome-modal .step.visible {
