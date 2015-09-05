@@ -164,8 +164,8 @@ button i.fa.sml {
     color: white;
     text-shadow: 0 0 2px black;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 2px;
+    top: 14px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms;
@@ -182,7 +182,7 @@ button i.fa.sml {
 .device-menu {
     position: absolute;
     right: 0;
-    top: -7px;
+    top: -4px;
     opacity: 0;
     transition: opacity 300ms;
     z-index: 10;
@@ -251,7 +251,7 @@ button i.fa.sml {
 
 .artwork .device-menu {
     top: -17px;
-    right: 2px;
+    right: 0;
 }
 
 body > * {
