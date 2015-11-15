@@ -16,7 +16,14 @@ body {
     background: url(bg.png);
 }
 
-body > h2 {
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+main > h2 {
     position: fixed;
     z-index: 1;
     bottom: 5px;
@@ -29,25 +36,32 @@ body > h2 {
     pointer-events: none;
 }
 
-body > nav {
+main > nav {
     display: flex;
+    flex-basis: 0%;
     background: rgba(255, 255, 255, 0.9);
     padding: 5px;
     border-bottom: 1px solid #eee;
     z-index: 11;
 }
 
-body > nav > div {
+main > nav > div {
     padding-top: 1rem;
+    padding-bottom: 1rem;
     padding-right: 5px;
     margin-right: 5px;
     border-right: 1px solid #eee;
 }
 
-body > nav > div:last-child {
+main > nav > div:last-child {
     padding-right: 0;
     margin-right: 0;
     border-right: none;
+}
+
+main > article {
+    flex-grow: 1;
+    display: flex;
 }
 
 button i.fa {
@@ -91,7 +105,7 @@ button i.fa.sml {
     text-align: center;
     left: 0;
     right: 5px;
-    bottom: 10px;
+    bottom: 8px;
     /* it partially covers the buttons */
     pointer-events: none;
 }
@@ -122,6 +136,7 @@ button i.fa.sml {
 }
 
 .device-list {
+    flex-grow: 1;
     position: relative;
     overflow: scroll;
     align-items: center;
@@ -224,13 +239,38 @@ button i.fa.sml {
     transition: all 300ms;
 }
 
-.video-placeholder .fa-plug {
-    color: white;
+.video-placeholder-help {
     position: absolute;
     left: 50%;
     top: 50%;
     margin-left: -6px;
     margin-top: -6px;
+}
+
+.video-placeholder-help > i.fa {
+    color: white;
+}
+
+.video-placeholder-help > .popup {
+    transition: opacity 300ms;
+    opacity: 0;
+    pointer-events: none;
+
+    position: absolute;
+    left: 0;
+    background: white;
+    padding: 5px;
+    border: solid #eee 1px;
+    margin-top: 10px;
+    border-radius: 4px;
+    z-index: 10;
+    width: 185px;
+    font-size: 0.9em;
+}
+
+.video-placeholder-help:hover > .popup {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .artwork {
