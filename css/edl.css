@@ -37,6 +37,7 @@ main > h2 {
 }
 
 main > nav {
+    flex-shrink: 0;
     display: flex;
     background: rgba(255, 255, 255, 0.9);
     padding: 5px;
