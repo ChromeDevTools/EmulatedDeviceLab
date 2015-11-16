@@ -13,32 +13,34 @@
 </head>
 <body>
 
-<h2>Emulated Device Lab</h2>
+<main>
+    <h2>Emulated Device Lab</h2>
 
-<nav>
-    <div id="navigation">
-        <input class="url" type="text" value="http://www.smashingmagazine.com/" spellcheck="false"/>
-        <button class="reload" title="Reload all devices"><i class="fa fa-refresh"></i></button>
-    </div>
-    <div id="new-device">
-        <select class="device-selector"></select>
-        <button class="spawn" title="Spawn new device"><i class="fa fa-plus"></i></button>
-    </div>
-    <div id="zoom">
-        <button class="zoom-out" title="Zoom out"><i class="fa fa-search-minus"></i></button>
-        <span class="zoom-value"></span>
-        <input type="range" min="0.1" max="1" value="0.3" step="0.1" class="zoom" title="Zoom level"/>
-        <button class="zoom-in" title="Zoom in"><i class="fa fa-search-plus"></i></button>
-    </div>
-    <div id="config">
-        <button title="Settings"><i class="fa fa-cogs"></i></button>
-        <div class="dropdown-menu"></div>
-    </div>
-</nav>
+    <nav>
+        <div id="navigation">
+            <input class="url" type="text" value="http://www.smashingmagazine.com/" spellcheck="false"/>
+            <button class="reload" title="Reload all devices"><i class="fa fa-refresh"></i></button>
+        </div>
+        <div id="new-device">
+            <select class="device-selector"></select>
+            <button class="spawn" title="Spawn new device"><i class="fa fa-plus"></i></button>
+        </div>
+        <div id="zoom">
+            <button class="zoom-out" title="Zoom out"><i class="fa fa-search-minus"></i></button>
+            <span class="zoom-value"></span>
+            <input type="range" min="0.1" max="1" value="0.3" step="0.1" class="zoom" title="Zoom level"/>
+            <button class="zoom-in" title="Zoom in"><i class="fa fa-search-plus"></i></button>
+        </div>
+        <div id="config">
+            <button title="Settings"><i class="fa fa-cogs"></i></button>
+            <div class="dropdown-menu"></div>
+        </div>
+    </nav>
 
-<article>
-    <div class="device-list"></div>
-</article>
+    <article>
+        <div class="device-list"></div>
+    </article>
+</main>
 
 <template id="device-list-item-tpl">
     <div class="device-list-item">
@@ -53,8 +55,13 @@
               </nav>
             </div>
         </header>
-        <div class="video-placeholder" title="Not connected">
-            <i class="fa fa-plug"></i>
+        <div class="video-placeholder">
+            <div class="video-placeholder-help">
+                <i class="fa fa-question-circle"></i>
+                <div class="popup">
+                    To enable streaming, right-click within the device's popup and choose "Stream to EDL".
+                </div>
+            </div>
         </div>
     </div>
 </template>
