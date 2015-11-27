@@ -10,6 +10,8 @@ Chrome extension that allows simultaneous testing on multiple emulated devices.
 - provides single page where all devices can be managed
 
 ## Installation
+You can download this extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/oaonfodocibcdobdeelbbfggjombamff/) or install it from sources:
+
 - Download latest version of EmulatedDeviceLab from [here](https://github.com/ChromeDevTools/EmulatedDeviceLab/releases/download/0.1.0/EmulatedDeviceLab-v0.1.0.zip) and unzip it. Alternatively, clone this repository (recommended for contributors).
 - In Chrome, go to chrome://extensions, or Window > Extensions from the Chrome File Menu.
 - Enable 'Developer Mode' by clicking the box in the upper right.
