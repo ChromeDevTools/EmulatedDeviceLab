@@ -2113,7 +2113,7 @@ function logloads(loads) {
     }
   }
 
-  // propogate execution errors
+  // propagate execution errors
   // see https://bugs.ecmascript.org/show_bug.cgi?id=2993
   function doEnsureEvaluated(module, seen, loader) {
     var err = ensureEvaluated(module, seen, loader);

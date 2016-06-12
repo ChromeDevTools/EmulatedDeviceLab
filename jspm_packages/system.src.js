@@ -424,7 +424,7 @@ function register(loader) {
    * Then the entry gets populated with derived information during processing:
    *    - normalizedDeps derived from deps, created in instantiate
    *    - groupIndex used by group linking algorithm
-   *    - evaluated indicating whether evaluation has happend
+   *    - evaluated indicating whether evaluation has happened
    *    - module the module record object, containing:
    *      - exports actual module exports
    *      
